@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 
 import {
   Lock,
@@ -11,162 +13,92 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  ShieldCheck,
-  Headphones,
-  BarChart3,
 } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
-import Footer from '@/components/footer';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+const LoginShowcase = dynamic(() => import('@/components/login-showcase'), { ssr: false });
+const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
 export default function LoginPage() {
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [department, setDepartment] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const router = useRouter();
+
+  const handleLogin = () => {
+
+    if (
+      email === 'admin@123' &&
+      password === '1234'
+    ) {
+
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', email);
+      }
+      localStorage.setItem('department', department);
+
+      switch (department) {
+
+        case 'CRM':
+          router.push('/crm-dashboard');
+          break;
+
+        case 'Sales':
+          router.push('/sales-dashboard');
+          break;
+
+        case 'Manufacturing':
+          router.push('/manufacturing-dashboard');
+          break;
+
+        case 'Warehouse':
+          router.push('/warehouse-dashboard');
+          break;
+
+        default:
+          alert('Please select a department');
+      }
+
+    } else {
+      alert('Invalid credentials');
+    }
+  };
 
   return (
     <>
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#f7faf5] via-white to-[#edf7ea]">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#f7faf5] via-white to-[#edf7ea] min-h-screen flex flex-col">
 
         {/* Background Glow */}
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-green-200/30 blur-3xl rounded-full" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-green-100/40 blur-3xl rounded-full" />
 
         {/* Main Section */}
-        <section className="relative z-10">
+        <section className="relative z-10 flex-1">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-              {/* LEFT SIDE */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
-                className="relative"
-              >
-
-                {/* Logo */}
-                <Link href="/" className="inline-flex items-center gap-3 mb-10">
-                  <Image
-                    src="/logo/logo.png"
-                    alt="Meetel"
-                    width={190}
-                    height={60}
-                    priority
-                  />
-                </Link>
-
-                {/* Text */}
-                <div className="space-y-6">
-
-                  <div>
-                    <p className="text-primary font-semibold text-lg mb-3">
-                      Welcome Back!
-                    </p>
-
-                    <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                      Login to your
-                      <span className="block text-primary">
-                        account
-                      </span>
-                    </h1>
-                  </div>
-
-                  <div className="w-20 h-1 bg-primary rounded-full" />
-
-                  <p className="text-lg text-foreground/70 leading-relaxed max-w-xl">
-                    Access your dashboard to manage orders, track deliveries,
-                    and explore our premium paper solutions with integrated ERP tools.
-                  </p>
-                </div>
-
-                {/* Product Showcase */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative mt-12"
-                >
-
-                  {/* Glow */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[500px] h-[500px] bg-green-200/30 blur-3xl rounded-full" />
-                  </div>
-
-                  {/* Product Image */}
-                  <div className="relative z-10 flex justify-center">
-                    <Image
-                      src="/image/img.png"
-                      alt="Thermal Paper Rolls"
-                      width={520}
-                      height={520}
-                      priority
-                      className="object-contain drop-shadow-2xl"
-                    />
-                  </div>
-
-                  {/* Floating Feature Card */}
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    className="relative z-20 mt-[-40px] backdrop-blur-xl bg-gradient-to-r from-[#0b4d1b] to-[#135d24] rounded-3xl p-6 shadow-[0_25px_60px_rgba(0,0,0,0.35)] border border-white/10"
-                  >
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-                      <div className="text-white">
-                        <ShieldCheck className="w-7 h-7 mb-3 text-green-300" />
-                        <h3 className="font-semibold mb-1">
-                          Secure Access
-                        </h3>
-                        <p className="text-sm text-white/70">
-                          Your data is always safe with us.
-                        </p>
-                      </div>
-
-                      <div className="text-white">
-                        <Headphones className="w-7 h-7 mb-3 text-green-300" />
-                        <h3 className="font-semibold mb-1">
-                          Dedicated Support
-                        </h3>
-                        <p className="text-sm text-white/70">
-                          We’re here to help you 24/7.
-                        </p>
-                      </div>
-
-                      <div className="text-white">
-                        <ArrowRight className="w-7 h-7 mb-3 text-green-300" />
-                        <h3 className="font-semibold mb-1">
-                          Fast & Reliable
-                        </h3>
-                        <p className="text-sm text-white/70">
-                          Seamless experience every time.
-                        </p>
-                      </div>
-
-                      <div className="text-white">
-                        <BarChart3 className="w-7 h-7 mb-3 text-green-300" />
-                        <h3 className="font-semibold mb-1">
-                          Smart Dashboard
-                        </h3>
-                        <p className="text-sm text-white/70">
-                          Everything at your fingertips.
-                        </p>
-                      </div>
-
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
+              {/* LEFT SIDE (lazy-loaded to reduce initial bundle) */}
+              <LoginShowcase />
 
               {/* RIGHT SIDE */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
-                className="flex justify-center"
-              >
+              <div className="flex justify-center">
 
                 <div className="w-full max-w-xl">
 
@@ -191,7 +123,13 @@ export default function LoginPage() {
                     </div>
 
                     {/* Form */}
-                    <form className="space-y-6">
+                    <form
+                      className="space-y-6"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handleLogin();
+                      }}
+                    >
 
                       {/* Email */}
                       <div>
@@ -205,6 +143,8 @@ export default function LoginPage() {
                           <Input
                             type="email"
                             placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="h-14 pl-12 rounded-2xl border-border focus-visible:ring-primary"
                           />
                         </div>
@@ -222,9 +162,11 @@ export default function LoginPage() {
                           <Input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             style={{ WebkitAppearance: 'none' }}
                             className="h-14 pl-12 pr-12 rounded-2xl border-border focus-visible:ring-primary [&::-ms-reveal]:hidden [&::-ms-clear]:hidden"
-                            />
+                          />
 
                           <button
                             type="button"
@@ -240,15 +182,52 @@ export default function LoginPage() {
                         </div>
                       </div>
 
+                      {/* Department */}
+                      <div className="w-full">
+                        <label className="text-sm font-semibold text-foreground mb-3 block">
+                          Department
+                        </label>
+
+                        <Select onValueChange={setDepartment}>
+                          <SelectTrigger className="w-full h-14 rounded-2xl border-border focus:ring-primary">
+                            <SelectValue placeholder="Select Department" />
+                          </SelectTrigger>
+
+                          <SelectContent>
+                            <SelectItem value="CRM">
+                              CRM
+                            </SelectItem>
+
+                            <SelectItem value="Sales">
+                              Sales
+                            </SelectItem>
+
+                            <SelectItem value="Manufacturing">
+                              Manufacturing
+                            </SelectItem>
+
+                            <SelectItem value="Warehouse">
+                              Warehouse
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
                       {/* Remember */}
                       <div className="flex items-center justify-between">
 
                         <div className="flex items-center space-x-2">
-                          <Checkbox id="remember" />
+                          <Checkbox
+                            id="remember"
+                            checked={rememberMe}
+                            onCheckedChange={(checked) =>
+                              setRememberMe(checked === true)
+                            }
+                          />
 
                           <label
                             htmlFor="remember"
-                            className="text-sm text-foreground/70"
+                            className="text-sm text-foreground/70 cursor-pointer"
                           >
                             Remember me
                           </label>
@@ -260,36 +239,18 @@ export default function LoginPage() {
                         >
                           Forgot Password?
                         </button>
+
                       </div>
 
                       {/* Login Button */}
                       <Button
+                        type="submit"
+                        onClick={handleLogin}
                         className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#0b4d1b] to-[#14742f] hover:opacity-95 text-white text-lg shadow-[0_15px_40px_rgba(0,128,0,0.25)] transition-all duration-300"
                       >
                         Login
 
                         <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-
-                      {/* Divider */}
-                      <div className="flex items-center gap-4 py-2">
-                        <div className="h-px bg-border flex-1" />
-
-                        <span className="text-foreground/50 text-sm">
-                          or
-                        </span>
-
-                        <div className="h-px bg-border flex-1" />
-                      </div>
-
-                      {/* OTP */}
-                      <Button
-                        variant="outline"
-                        className="w-full h-14 rounded-2xl border-primary/30 text-primary hover:bg-primary/5 text-lg"
-                      >
-                        <ShieldCheck className="w-5 h-5 mr-2" />
-
-                        Login with OTP
                       </Button>
 
                       {/* Bottom Text */}
@@ -306,14 +267,15 @@ export default function LoginPage() {
                     </form>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
-      </div>
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
+
+      </div>
     </>
   );
 }
