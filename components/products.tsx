@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { products } from '@/lib/data';
 
 import {
@@ -93,69 +94,77 @@ export default function Products() {
 
           {products.map((product) => (
 
-            <motion.div
+            <Link
               key={product.id}
-              className="group relative p-3 bg-background rounded-[28px] border border-border hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 overflow-hidden"
-              variants={itemVariants}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              href="https://supermaxstores.in/collections"
+              target="_blank"
+              className="block"
             >
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-accent/0 group-hover:from-primary/5 group-hover:to-accent/10 rounded-[28px] transition-all duration-300" />
+              <motion.div
+                className="group relative p-3 bg-background rounded-[28px] border border-border hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 overflow-hidden cursor-pointer"
+                variants={itemVariants}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              >
 
-              <div className="relative z-10">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-accent/0 group-hover:from-primary/5 group-hover:to-accent/10 rounded-[28px] transition-all duration-300" />
 
-                {/* PRODUCT IMAGE */}
-                <div className="relative overflow-hidden rounded-[24px] mb-5 bg-secondary/20">
+                <div className="relative z-10">
 
-                  <img
-                    src={productImages[product.name]}
-                    alt={product.name}
-                    className="w-full h-[240px] object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {/* PRODUCT IMAGE */}
+                  <div className="relative overflow-hidden rounded-[24px] mb-5 bg-secondary/20">
 
-                  {/* Floating Icon */}
-                  <div className="absolute bottom-4 left-4 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center border border-border">
+                    <img
+                      src={productImages[product.name]}
+                      alt={product.name}
+                      className="w-full h-[240px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
 
-                    {(() => {
-                      const IconComponent = productIcons[product.name];
+                    {/* Floating Icon */}
+                    <div className="absolute bottom-4 left-4 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center border border-border">
 
-                      return (
-                        <IconComponent className="w-6 h-6 text-primary" />
-                      );
-                    })()}
+                      {(() => {
+                        const IconComponent = productIcons[product.name];
+
+                        return (
+                          <IconComponent className="w-6 h-6 text-primary" />
+                        );
+                      })()}
+
+                    </div>
+
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="px-2 pb-3">
+
+                    <h4 className="text-[32px] font-bold text-foreground mb-3 leading-none">
+                      {product.name}
+                    </h4>
+
+                    <p className="text-[18px] text-foreground/70 leading-relaxed mb-6">
+                      {product.description}
+                    </p>
+
+                    {/* CTA */}
+                    <div className="flex items-center text-primary font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
+
+                      <span className="text-[18px]">
+                        Learn More
+                      </span>
+
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+
+                    </div>
 
                   </div>
 
                 </div>
 
-                {/* CONTENT */}
-                <div className="px-2 pb-3">
+              </motion.div>
 
-                  <h4 className="text-[32px] font-bold text-foreground mb-3 leading-none">
-                    {product.name}
-                  </h4>
-
-                  <p className="text-[18px] text-foreground/70 leading-relaxed mb-6">
-                    {product.description}
-                  </p>
-
-                  {/* CTA */}
-                  <div className="flex items-center text-primary font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
-
-                    <span className="text-[18px]">
-                      Learn More
-                    </span>
-
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </motion.div>
+            </Link>
 
           ))}
 

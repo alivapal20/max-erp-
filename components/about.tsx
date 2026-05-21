@@ -31,65 +31,62 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-20 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-          {/* Left - Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+          {/* Left Side - Image Collage */}
           <motion.div
-
-
-className="relative h-[900px] w-[700px] -ml-30 rounded-full overflow-hidden bg-transparent scale-80"            
-
+            className="relative w-full max-w-[600px] aspect-[4/5] mx-auto rounded-[300px] overflow-hidden bg-transparent"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
 
-            {/* Image Collage */}
+            <div className="group grid grid-cols-2 grid-rows-2 w-full h-full gap-2 p-2">
 
+              {/* Image 1 */}
+              <div className="overflow-hidden rounded-tl-[300px] transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
+                <img
+                  src="/image/img3.jpg"
+                  alt="About 1"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
+                />
+              </div>
 
-<div className="group grid grid-cols-2 grid-rows-2 w-full h-full gap-[6px] p-3">
+              {/* Image 2 */}
+              <div className="overflow-hidden rounded-tr-[300px] transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
+                <img
+                  src="/image/img2.jpg"
+                  alt="About 2"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
+                />
+              </div>
 
+              {/* Image 3 */}
+              <div className="overflow-hidden rounded-bl-[300px] transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
+                <img
+                  src="/image/img1.jpg"
+                  alt="About 3"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
+                />
+              </div>
 
-  <div className="overflow-hidden transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
-    <img
-      src="/image/img3.jpg"
-      alt="About 1"
-      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
-    />
-  </div>
+              {/* Image 4 */}
+              <div className="overflow-hidden rounded-br-[300px] transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
+                <img
+                  src="/image/img4.jpg"
+                  alt="About 4"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
+                />
+              </div>
 
-  <div className="overflow-hidden transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
-    <img
-      src="/image/img2.jpg"
-      alt="About 2"
-      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
-    />
-  </div>
-
-  <div className="overflow-hidden transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
-    <img
-      src="/image/img1.jpg"
-      alt="About 3"
-      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
-    />
-  </div>
-
-  <div className="overflow-hidden transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
-    <img
-      src="/image/img4.jpg"
-      alt="About 4"
-      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-95 hover:scale-110"
-    />
-  </div>
-
-</div>
-
+            </div>
           </motion.div>
 
-          {/* Right - Content */}
+          {/* Right Side - Content */}
           <motion.div
             className="space-y-8"
             variants={containerVariants}
@@ -97,14 +94,17 @@ className="relative h-[900px] w-[700px] -ml-30 rounded-full overflow-hidden bg-t
             whileInView="visible"
             viewport={{ once: true }}
           >
+
             <motion.div variants={itemVariants}>
-              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-                Delivering Excellence <span className="text-primary">Since 1997</span>
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 leading-tight">
+                Delivering Excellence{' '}
+                <span className="text-primary">Since 1997</span>
               </h2>
 
               <p className="text-lg text-foreground/70 leading-relaxed">
-                Meetel Computers & Consumables has been a trusted name in thermal paper products, printing solutions,
-                and integrated ERP systems for over two decades.
+                Meetel Computers & Consumables has been a trusted name in thermal
+                paper products, printing solutions, and integrated ERP systems
+                for over two decades.
               </p>
             </motion.div>
 
@@ -112,10 +112,11 @@ className="relative h-[900px] w-[700px] -ml-30 rounded-full overflow-hidden bg-t
               className="text-base text-foreground/60 leading-relaxed"
               variants={itemVariants}
             >
-              We specialize in providing high-quality thermal paper rolls, advanced printing equipment, and
-              comprehensive business management solutions designed to empower enterprises across industries. Our
-              commitment to excellence and customer satisfaction has made us the preferred partner for hundreds of
-              businesses nationwide.
+              We specialize in providing high-quality thermal paper rolls,
+              advanced printing equipment, and comprehensive business management
+              solutions designed to empower enterprises across industries.
+              Our commitment to excellence and customer satisfaction has made
+              us the preferred partner for hundreds of businesses nationwide.
             </motion.p>
 
             {/* Stats Grid */}
@@ -129,7 +130,7 @@ className="relative h-[900px] w-[700px] -ml-30 rounded-full overflow-hidden bg-t
                 return (
                   <motion.div
                     key={index}
-                    className="p-4 bg-secondary/50 rounded-lg border border-border hover:border-primary/50 transition-colors"
+                    className="p-5 bg-secondary/50 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300"
                     variants={itemVariants}
                     whileHover={{ y: -4 }}
                   >
