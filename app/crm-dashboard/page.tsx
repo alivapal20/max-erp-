@@ -369,65 +369,7 @@ export default function CRMDashboardPage() {
     setLeads(updated)
   }
 
-  /* =======================================================
-     WORKFLOW DIAGRAM
-  ======================================================= */
-
-  const WorkflowDiagram = () => (
-    <div className="bg-white rounded-3xl border p-8 shadow-sm">
-
-      <h2 className="text-2xl font-bold mb-8">
-        ERP Workflow Automation
-      </h2>
-
-      <div className="flex items-center justify-between">
-
-        {[
-          { label: 'Lead', icon: '👤' },
-          { label: 'Approval', icon: '✓' },
-          { label: 'Sales', icon: '📊' },
-          { label: 'Manufacturing', icon: '🏭' },
-          { label: 'Warehouse', icon: '📦' },
-          { label: 'Inventory', icon: '📋' },
-        ].map((step, idx) => (
-
-          <div
-            key={idx}
-            className="flex items-center flex-1"
-          >
-
-            <div className="flex flex-col items-center flex-1 relative">
-
-              {idx > 0 && (
-                <div className="absolute -left-1/2 top-8 w-full h-0.5 bg-gradient-to-r from-green-300 to-green-500" />
-              )}
-
-              <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-green-100 to-green-50 border-2 border-green-400 flex items-center justify-center text-2xl shadow-md">
-
-                {step.icon}
-
-              </div>
-
-              <p className="text-sm font-semibold mt-3 text-gray-700">
-
-                {step.label}
-
-              </p>
-
-            </div>
-
-            {idx < 5 && (
-              <ArrowRight className="w-5 h-5 text-green-500 mx-2 -mt-8" />
-            )}
-
-          </div>
-
-        ))}
-
-      </div>
-
-    </div>
-  )
+  
 
   /* =======================================================
      RETURN
@@ -573,9 +515,7 @@ export default function CRMDashboardPage() {
 
         </div>
 
-        {/* WORKFLOW */}
-
-        <WorkflowDiagram />
+       
 
         {/* MAIN GRID */}
 
