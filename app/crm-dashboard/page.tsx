@@ -84,6 +84,8 @@ export default function CRMDashboardPage() {
   const [editingIndex, setEditingIndex] =
     useState<number | null>(null)
 
+  const [searchQuery, setSearchQuery] = useState('')
+
   /* =======================================================
      FORM
   ======================================================= */
@@ -155,6 +157,12 @@ export default function CRMDashboardPage() {
         'Proposal already shared with procurement team.',
     },
   ])
+
+  const filteredLeads = leads.filter((lead) =>
+    lead.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase().trim())
+  )
 
   /* =======================================================
      KPI CARDS
@@ -369,7 +377,8 @@ export default function CRMDashboardPage() {
     setLeads(updated)
   }
 
-  
+  /* =======================================================
+
 
   /* =======================================================
      RETURN
@@ -399,6 +408,8 @@ export default function CRMDashboardPage() {
             <Input
               placeholder="Search..."
               className="w-[340px] h-11 rounded-2xl border-gray-200 pl-11"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
 
           </div>
@@ -515,8 +526,9 @@ export default function CRMDashboardPage() {
 
         </div>
 
-       
+        {/* WORKFLOW */}
 
+      
         {/* MAIN GRID */}
 
         <div className="grid grid-cols-12 gap-5">
@@ -587,7 +599,7 @@ export default function CRMDashboardPage() {
 
               <tbody>
 
-                {leads.map((lead, idx) => (
+                {filteredLeads.map((lead, idx) => (
 
                   <tr
                     key={idx}
@@ -923,6 +935,38 @@ export default function CRMDashboardPage() {
                   type="text"
                   name="company"
                   value={addForm.company}
+                  onChange={handleAddChange}
+                  className="w-full mt-2 border rounded-2xl p-4"
+                />
+
+              </div>
+
+              <div>
+
+                <label className="text-sm text-gray-500">
+                  Product
+                </label>
+
+                <input
+                  type="text"
+                  name="product"
+                  value={addForm.product}
+                  onChange={handleAddChange}
+                  className="w-full mt-2 border rounded-2xl p-4"
+                />
+
+              </div>
+
+              <div>
+
+                <label className="text-sm text-gray-500">
+                  Assigned
+                </label>
+
+                <input
+                  type="text"
+                  name="assigned"
+                  value={addForm.assigned}
                   onChange={handleAddChange}
                   className="w-full mt-2 border rounded-2xl p-4"
                 />

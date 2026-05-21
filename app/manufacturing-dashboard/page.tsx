@@ -38,6 +38,9 @@ import {
 export default function ManufacturingDashboardPage() {
 
   const [selectedBatch, setSelectedBatch] = useState<any>(null);
+  const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const productionData = [
     { name: 'Completed', value: 42, color: '#22c55e' },
@@ -95,7 +98,7 @@ export default function ManufacturingDashboardPage() {
     },
   ];
 
-  const batches = [
+  const [batches, setBatches] = useState<any[]>([
     {
       id: 'MF-2048',
       product: 'Thermal Rolls',
@@ -132,7 +135,57 @@ export default function ManufacturingDashboardPage() {
       status: 'Maintenance',
       color: 'red',
     },
-  ];
+  ]);
+
+  const [showBatchModal, setShowBatchModal] = useState(false);
+  const [batchForm, setBatchForm] = useState({
+    product: '',
+    quantity: '',
+    machine: '',
+    operator: '',
+    status: 'Pending',
+  });
+
+  function handleBatchFormChange(e: any) {
+    const { name, value } = e.target;
+    setBatchForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function saveBatch() {
+    const built = {
+      id: editingIndex !== null ? batches[editingIndex].id : `MF-${Math.floor(Math.random() * 9000) + 2000}`,
+      product: batchForm.product || 'New Product',
+      quantity: batchForm.quantity || '-',
+      machine: batchForm.machine || '-',
+      operator: batchForm.operator || '-',
+      status: batchForm.status || 'Pending',
+      color:
+        batchForm.status === 'Running'
+          ? 'green'
+          : batchForm.status === 'Pending'
+          ? 'yellow'
+          : batchForm.status === 'Completed'
+          ? 'blue'
+          : batchForm.status === 'Maintenance'
+          ? 'red'
+          : 'green',
+    };
+
+    if (editingIndex !== null) {
+      setBatches((prev) => prev.map((b, i) => (i === editingIndex ? built : b)));
+    } else {
+      setBatches((prev) => [built, ...prev]);
+    }
+
+    setShowBatchModal(false);
+    setEditingIndex(null);
+    setBatchForm({ product: '', quantity: '', machine: '', operator: '', status: 'Pending' });
+  }
+
+  function deleteBatch(index: number) {
+    setBatches((prev) => prev.filter((_, i) => i !== index));
+    setMenuOpenIndex(null);
+  }
 
   return (
     <div className="min-h-screen bg-[#f6f8f7]">
@@ -159,6 +212,8 @@ export default function ManufacturingDashboardPage() {
             <input
               placeholder="Search batches, machines..."
               className="bg-transparent outline-none text-sm flex-1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
 
             <span className="text-xs text-gray-400 border rounded-lg px-2 py-1">
@@ -304,7 +359,7 @@ export default function ManufacturingDashboardPage() {
                     All Status
                   </button>
 
-                  <button className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2">
+                  <button onClick={() => setShowBatchModal(true)} className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2">
 
                     <ClipboardList className="w-4 h-4" />
 
@@ -336,61 +391,93 @@ export default function ManufacturingDashboardPage() {
 
                 <tbody>
 
-                  {batches.map((batch, index) => (
+                  {batches
+                    .filter((b) =>
+                      [b.id, b.product, b.machine, b.operator]
+                        .join(' ')
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase().trim())
+                    )
+                    .map((batch) => {
+                      const originalIndex = batches.findIndex((bb) => bb.id === batch.id);
+                      return (
+                        <tr
+                          key={batch.id}
+                          className="border-b hover:bg-gray-50 transition"
+                        >
 
-                    <tr
-                      key={index}
-                      className="border-b hover:bg-gray-50 transition"
-                    >
+                          <td className="py-5 font-medium">{batch.id}</td>
 
-                      <td className="py-5 font-medium">
-                        {batch.id}
-                      </td>
+                          <td>{batch.product}</td>
 
-                      <td>{batch.product}</td>
+                          <td>{batch.quantity}</td>
 
-                      <td>{batch.quantity}</td>
+                          <td>{batch.machine}</td>
 
-                      <td>{batch.machine}</td>
+                          <td>{batch.operator}</td>
 
-                      <td>{batch.operator}</td>
+                          <td>
+                            <span className={`
+                              px-3 py-1 rounded-full text-xs font-semibold
+                              ${batch.color === 'green' && 'bg-green-100 text-green-700'}
+                              ${batch.color === 'yellow' && 'bg-yellow-100 text-yellow-700'}
+                              ${batch.color === 'blue' && 'bg-blue-100 text-blue-700'}
+                              ${batch.color === 'red' && 'bg-red-100 text-red-700'}
+                            `}>{batch.status}</span>
+                          </td>
 
-                      <td>
+                          <td>
+                            <div className="relative">
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => setSelectedBatch(batch)}
+                                  className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
+                                >
+                                  <Eye className="w-4 h-4" />
+                                </button>
 
-                        <span className={`
-                          px-3 py-1 rounded-full text-xs font-semibold
-                          ${batch.color === 'green' && 'bg-green-100 text-green-700'}
-                          ${batch.color === 'yellow' && 'bg-yellow-100 text-yellow-700'}
-                          ${batch.color === 'blue' && 'bg-blue-100 text-blue-700'}
-                          ${batch.color === 'red' && 'bg-red-100 text-red-700'}
-                        `}>
-                          {batch.status}
-                        </span>
+                                <button
+                                  onClick={() => setMenuOpenIndex(menuOpenIndex === originalIndex ? null : originalIndex)}
+                                  className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
+                                >
+                                  <MoreVertical className="w-4 h-4" />
+                                </button>
+                              </div>
 
-                      </td>
+                              {menuOpenIndex === originalIndex && (
+                                <div className="absolute right-0 mt-2 w-36 bg-white border rounded-xl shadow-lg z-50">
+                                  <button
+                                    onClick={() => {
+                                      setEditingIndex(originalIndex);
+                                      setBatchForm({
+                                        product: batch.product,
+                                        quantity: batch.quantity,
+                                        machine: batch.machine,
+                                        operator: batch.operator,
+                                        status: batch.status,
+                                      });
+                                      setShowBatchModal(true);
+                                      setMenuOpenIndex(null);
+                                    }}
+                                    className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2"
+                                  >
+                                    Edit
+                                  </button>
 
-                      <td>
+                                  <button
+                                    onClick={() => deleteBatch(originalIndex)}
+                                    className="w-full text-left px-4 py-3 hover:bg-gray-100 text-red-600 flex items-center gap-2"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </td>
 
-                        <div className="flex items-center gap-2">
-
-                          <button
-                            onClick={() => setSelectedBatch(batch)}
-                            className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
-
-                          <button className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center">
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  ))}
+                        </tr>
+                      );
+                    })}
 
                 </tbody>
 
@@ -744,6 +831,86 @@ export default function ManufacturingDashboardPage() {
               >
                 Close
               </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+      {showBatchModal && (
+
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+          <div
+            onClick={() => setShowBatchModal(false)}
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+          />
+
+          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-8 shadow-2xl border">
+
+            <div className="flex items-start justify-between mb-8">
+
+              <div>
+
+                <p className="text-green-600 text-sm font-semibold uppercase tracking-widest">
+                  Create Batch
+                </p>
+
+                <h2 className="text-[32px] font-bold mt-2">New Production Batch</h2>
+
+              </div>
+
+              <button
+                onClick={() => setShowBatchModal(false)}
+                className="text-3xl"
+              >
+                ×
+              </button>
+
+            </div>
+
+            <div className="grid grid-cols-2 gap-5">
+
+              <div>
+                <label className="text-sm text-gray-500">Product</label>
+                <input name="product" value={batchForm.product} onChange={handleBatchFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Quantity</label>
+                <input name="quantity" value={batchForm.quantity} onChange={handleBatchFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Machine</label>
+                <input name="machine" value={batchForm.machine} onChange={handleBatchFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Operator</label>
+                <input name="operator" value={batchForm.operator} onChange={handleBatchFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Status</label>
+                <select name="status" value={batchForm.status} onChange={handleBatchFormChange} className="w-full mt-2 border rounded-2xl p-4">
+                  <option>Pending</option>
+                  <option>Running</option>
+                  <option>Completed</option>
+                  <option>Maintenance</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div className="flex gap-4 mt-8 justify-end">
+
+              <button onClick={() => setShowBatchModal(false)} className="px-6 py-3 rounded-2xl border">Cancel</button>
+
+              <button onClick={saveBatch} className="px-6 py-3 rounded-2xl bg-green-500 text-white">Save Batch</button>
 
             </div>
 

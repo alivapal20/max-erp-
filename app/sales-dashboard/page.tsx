@@ -34,6 +34,98 @@ import {
 export default function SalesDashboardPage() {
 
   const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const [orders, setOrders] = useState<any[]>([
+    {
+      id: 'ORD-1048',
+      customer: 'Retail Mart',
+      product: 'Thermal Rolls',
+      quantity: '500 Rolls',
+      amount: '₹ 2,45,000',
+      status: 'Confirmed',
+      color: 'green',
+    },
+    {
+      id: 'ORD-1047',
+      customer: 'QuickPOS Solutions',
+      product: 'POS Rolls',
+      quantity: '300 Rolls',
+      amount: '₹ 1,80,000',
+      status: 'In Production',
+      color: 'blue',
+    },
+    {
+      id: 'ORD-1046',
+      customer: 'City Super Store',
+      product: 'Barcode Printers',
+      quantity: '5 Units',
+      amount: '₹ 3,25,000',
+      status: 'Pending',
+      color: 'yellow',
+    },
+    {
+      id: 'ORD-1045',
+      customer: 'Apollo',
+      product: 'Thermal Rolls',
+      quantity: '1000 Rolls',
+      amount: '₹ 4,50,000',
+      status: 'Completed',
+      color: 'purple',
+    },
+  ]);
+
+  const [orderForm, setOrderForm] = useState({
+    customer: '',
+    product: '',
+    quantity: '',
+    amount: '',
+    status: 'Pending',
+  });
+
+  function handleOrderFormChange(e: any) {
+    const { name, value } = e.target;
+    setOrderForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function saveOrder() {
+    const built = {
+      id: editingIndex !== null ? orders[editingIndex].id : `ORD-${Math.floor(Math.random() * 9000) + 1000}`,
+      customer: orderForm.customer || 'Unnamed Customer',
+      product: orderForm.product || 'Product',
+      quantity: orderForm.quantity || '-',
+      amount: orderForm.amount || '-',
+      status: orderForm.status || 'Pending',
+      color:
+        orderForm.status === 'Confirmed'
+          ? 'green'
+          : orderForm.status === 'In Production'
+          ? 'blue'
+          : orderForm.status === 'Completed'
+          ? 'purple'
+          : orderForm.status === 'Pending'
+          ? 'yellow'
+          : 'green',
+    };
+
+    if (editingIndex !== null) {
+      setOrders((prev) => prev.map((o, i) => (i === editingIndex ? built : o)));
+    } else {
+      setOrders((prev) => [built, ...prev]);
+    }
+
+    setShowOrderModal(false);
+    setEditingIndex(null);
+    setOrderForm({ customer: '', product: '', quantity: '', amount: '', status: 'Pending' });
+  }
+
+  function deleteOrder(index: number) {
+    setOrders((prev) => prev.filter((_, i) => i !== index));
+    setMenuOpenIndex(null);
+  }
 
   const salesChartData = [
     { name: 'Pending', value: 28, color: '#f59e0b' },
@@ -104,11 +196,11 @@ export default function SalesDashboardPage() {
             <input
               placeholder="Search orders, customers, products..."
               className="bg-transparent outline-none text-sm flex-1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
 
-            <span className="text-xs text-gray-400 border rounded-lg px-2 py-1">
-              Ctrl + K
-            </span>
+            
           </div>
 
         </div>
@@ -252,7 +344,7 @@ export default function SalesDashboardPage() {
                     All Customers
                   </button>
 
-                  <button className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2">
+                  <button onClick={() => setShowOrderModal(true)} className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2">
                     <Plus className="w-4 h-4" />
                     Create New Order
                   </button>
@@ -282,44 +374,13 @@ export default function SalesDashboardPage() {
 
                 <tbody>
 
-                  {[
-                    {
-                      id: 'ORD-1048',
-                      customer: 'Retail Mart',
-                      product: 'Thermal Rolls',
-                      quantity: '500 Rolls',
-                      amount: '₹ 2,45,000',
-                      status: 'Confirmed',
-                      color: 'green',
-                    },
-                    {
-                      id: 'ORD-1047',
-                      customer: 'QuickPOS Solutions',
-                      product: 'POS Rolls',
-                      quantity: '300 Rolls',
-                      amount: '₹ 1,80,000',
-                      status: 'In Production',
-                      color: 'blue',
-                    },
-                    {
-                      id: 'ORD-1046',
-                      customer: 'City Super Store',
-                      product: 'Barcode Printers',
-                      quantity: '5 Units',
-                      amount: '₹ 3,25,000',
-                      status: 'Pending',
-                      color: 'yellow',
-                    },
-                    {
-                      id: 'ORD-1045',
-                      customer: 'Apollo',
-                      product: 'Thermal Rolls',
-                      quantity: '1000 Rolls',
-                      amount: '₹ 4,50,000',
-                      status: 'Completed',
-                      color: 'purple',
-                    },
-                  ].map((order, index) => (
+                  {orders
+                    .filter((o) =>
+                      o.customer
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase().trim())
+                    )
+                    .map((order, index) => (
 
                     <tr
                       key={index}
@@ -356,22 +417,51 @@ export default function SalesDashboardPage() {
 
                       <td>
 
-                        <div className="flex items-center gap-2">
+                        <div className="relative">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setSelectedOrder(order)}
+                              className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
 
-                          <button
-                            onClick={() => setSelectedOrder(order)}
-                            className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
+                            <button
+                              onClick={() => setMenuOpenIndex(menuOpenIndex === index ? null : index)}
+                              className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center"
+                            >
+                              <MoreVertical className="w-4 h-4" />
+                            </button>
+                          </div>
 
-                          <button className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center">
-                            <FileText className="w-4 h-4" />
-                          </button>
+                          {menuOpenIndex === index && (
+                            <div className="absolute right-0 mt-2 w-36 bg-white border rounded-xl shadow-lg z-50">
+                              <button
+                                onClick={() => {
+                                  setEditingIndex(index);
+                                  setOrderForm({
+                                    customer: order.customer,
+                                    product: order.product,
+                                    quantity: order.quantity,
+                                    amount: order.amount,
+                                    status: order.status,
+                                  });
+                                  setShowOrderModal(true);
+                                  setMenuOpenIndex(null);
+                                }}
+                                className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2"
+                              >
+                                Edit
+                              </button>
 
-                          <button className="w-9 h-9 rounded-xl border hover:bg-gray-50 flex items-center justify-center">
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
+                              <button
+                                onClick={() => deleteOrder(index)}
+                                className="w-full text-left px-4 py-3 hover:bg-gray-100 text-red-600 flex items-center gap-2"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
 
                         </div>
 
@@ -585,6 +675,85 @@ export default function SalesDashboardPage() {
       </div>
 
       {/* MODAL */}
+      {showOrderModal && (
+
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+          <div
+            onClick={() => setShowOrderModal(false)}
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+          />
+
+          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-8 shadow-2xl border">
+
+            <div className="flex items-start justify-between mb-8">
+
+              <div>
+
+                <p className="text-green-600 text-sm font-semibold uppercase tracking-widest">
+                  Create Order
+                </p>
+
+                <h2 className="text-[32px] font-bold mt-2">New Sales Order</h2>
+
+              </div>
+
+              <button
+                onClick={() => setShowOrderModal(false)}
+                className="text-3xl"
+              >
+                ×
+              </button>
+
+            </div>
+
+            <div className="grid grid-cols-2 gap-5">
+
+              <div>
+                <label className="text-sm text-gray-500">Customer</label>
+                <input name="customer" value={orderForm.customer} onChange={handleOrderFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Product</label>
+                <input name="product" value={orderForm.product} onChange={handleOrderFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Quantity</label>
+                <input name="quantity" value={orderForm.quantity} onChange={handleOrderFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Amount</label>
+                <input name="amount" value={orderForm.amount} onChange={handleOrderFormChange} className="w-full mt-2 border rounded-2xl p-4" />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-500">Status</label>
+                <select name="status" value={orderForm.status} onChange={handleOrderFormChange} className="w-full mt-2 border rounded-2xl p-4">
+                  <option>Pending</option>
+                  <option>Confirmed</option>
+                  <option>In Production</option>
+                  <option>Completed</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div className="flex gap-4 mt-8 justify-end">
+
+              <button onClick={() => setShowOrderModal(false)} className="px-6 py-3 rounded-2xl border">Cancel</button>
+
+              <button onClick={saveOrder} className="px-6 py-3 rounded-2xl bg-green-500 text-white">Save Order</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
       {selectedOrder && (
 
         <div className="fixed inset-0 z-50 flex items-center justify-center">
