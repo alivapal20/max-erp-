@@ -13,9 +13,7 @@ export default function LoginShowcase() {
       transition={{ duration: 0.7 }}
       className="relative"
     >
-      <Link href="/" className="inline-flex items-center gap-3 mb-10">
-        <Image src="/placeholder-logo.png" alt="Meetel" width={190} height={60} style={{ width: 'auto', height: 'auto' }} />
-      </Link>
+      
 
       <div className="space-y-6">
         <div>

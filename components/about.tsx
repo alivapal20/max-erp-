@@ -39,7 +39,8 @@ export default function About() {
           <motion.div
 
 
-className="relative h-[900px] w-[700px] -ml-50 rounded-full overflow-hidden bg-transparent"
+className="relative h-[900px] w-[700px] -ml-30 rounded-full overflow-hidden bg-transparent scale-80"            
+
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -49,7 +50,8 @@ className="relative h-[900px] w-[700px] -ml-50 rounded-full overflow-hidden bg-t
             {/* Image Collage */}
 
 
-<div className="group grid grid-cols-2 grid-rows-2 w-full h-full gap-[2px]">
+<div className="group grid grid-cols-2 grid-rows-2 w-full h-full gap-[6px] p-3">
+
 
   <div className="overflow-hidden transition-all duration-500 hover:z-20 hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
     <img

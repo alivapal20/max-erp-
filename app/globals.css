@@ -123,3 +123,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Enable native smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Marquee animation for client logos: scroll exactly one full set then repeat */
+.marquee {
+  position: relative;
+}
+.marquee__inner {
+  display: flex;
+  width: max-content;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}

@@ -33,7 +33,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer id="contact" className="bg-foreground text-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <motion.div
@@ -46,9 +46,7 @@ export default function Footer() {
           {/* Brand Column */}
           <motion.div className="lg:col-span-1" variants={itemVariants}>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-foreground font-bold">
-                M
-              </div>
+              <img src="/mainlogo.png" alt="Meetel" className="w-15 h-15 rounded-lg object-contain bg-white" />
               <span className="text-xl font-bold">Meetel</span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
@@ -91,24 +89,54 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Link Columns */}
-          {Object.entries(footerLinks).map(([category, links], idx) => (
-            <motion.div key={category} variants={itemVariants}>
-              <h4 className="font-semibold text-white mb-4">{category}</h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {/* Important Links */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-semibold text-white mb-4">IMPORTANT LINKS</h4>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">Home</a></li>
+              <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">About Company</a></li>
+              <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">Services</a></li>
+              <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">CSR Activities</a></li>
+              <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">Clients</a></li>
+              <li><a href="#contact" className="text-white/70 hover:text-white transition-colors duration-300 text-sm">Contact us</a></li>
+            </ul>
+          </motion.div>
+
+          {/* Get In Touch */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-semibold text-white mb-4">GET IN TOUCH</h4>
+            <ul className="space-y-3 text-white/80 text-sm">
+              <li>9051808584 / 9830584843 / 9830066013</li>
+              <li>info@meetel.in</li>
+              <li>www.meetel.in</li>
+            </ul>
+          </motion.div>
+
+          {/* Corporate Office */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-semibold text-white mb-4">CORPORATE OFFICE</h4>
+            <div className="text-white/80 text-sm space-y-2 max-w-sm">
+              <p>Ambuja Neotia Ecostation, BP Block, Street No 9, Salt Lake Sector V,</p>
+              <p>12th floor, Suite No. 1201, Kolkata 700091,</p>
+              <p>Near Philips more</p>
+            </div>
+            <h4 className="font-semibold text-white mt-6 mb-3">HEAD OFFICE</h4>
+            <p className="text-white/80 text-sm">14/2 Old China Bazar Street, 2nd Floor, Room No: 169, Kolkata 700001</p>
+            <h4 className="font-semibold text-white mt-6 mb-3">DELHI OFFICE</h4>
+            <p className="text-white/80 text-sm">Ground Floor, Khasra No.12/26, Village Budhpur, Bajpur, North East Delhi, Delhi, 110036</p>
+          </motion.div>
+
+          {/* Offices */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-semibold text-white mb-4">BANGALORE OFFICE</h4>
+            <p className="text-white/80 text-sm">5TH BLOCK, 161/1 SITE NO 11, 100FEET ROAD, NEAT AGS, ULLALU, BLOCK VISHWESHWARAIAH, Bengaluru, Bengaluru Urban, Karnataka, 560056</p>
+
+            <h4 className="font-semibold text-white mt-6 mb-4">BIHAR OFFICE</h4>
+            <p className="text-white/80 text-sm">Sehgal Path Jakhanpur, Near Bharat Lal Tent House, Patna – 800001, Bihar</p>
+
+            <h4 className="font-semibold text-white mt-6 mb-4">JHARKHAND OFFICE</h4>
+            <p className="text-white/80 text-sm">Court Road, Rj Arcade, 2nd Floor, Near Bihar Club / Town Hall, Jaipal Singh Stadium, Ranchi</p>
+          </motion.div>
         </motion.div>
 
         {/* Divider */}

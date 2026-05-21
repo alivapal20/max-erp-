@@ -14,9 +14,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">
-              M
-            </div>
+            <img src="/mainlogo.png" alt="Meetel" className="w-15 h-15 rounded-lg object-contain" />
             <h1 className="text-3xl font-black leading-none tracking-tight text-[#0a8f3d] sm:text-3xl lg:text-4xl">
             MEETEL
           </h1>
