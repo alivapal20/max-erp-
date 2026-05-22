@@ -385,15 +385,15 @@ export default function CRMDashboardPage() {
   ======================================================= */
 
   return (
-    <div className="min-h-screen bg-[#f7f8f5]">
+    <div className="min-h-screen bg-[#f7f8f5] overflow-x-hidden">
 
       {/* ===================================================
          NAVBAR
       =================================================== */}
 
-      <header className="h-[72px] bg-white border-b border-gray-200 flex items-center justify-between px-5 sticky top-0 z-40">
+      <header className="h-auto sm:h-[72px] bg-white border-b border-gray-200 flex flex-wrap items-center justify-between px-4 sm:px-5 sticky top-0 z-40 gap-4 py-3 sm:py-0">
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-1 min-w-0">
 
           <button className="h-11 w-11 rounded-2xl border bg-white flex items-center justify-center">
 
@@ -407,7 +407,7 @@ export default function CRMDashboardPage() {
 
             <Input
               placeholder="Search..."
-              className="w-[340px] h-11 rounded-2xl border-gray-200 pl-11"
+              className="w-full sm:w-[340px] h-11 rounded-2xl border-gray-200 pl-11"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -416,7 +416,7 @@ export default function CRMDashboardPage() {
 
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
 
           <Bell className="w-5 h-5 text-gray-700" />
 
@@ -455,7 +455,7 @@ export default function CRMDashboardPage() {
          MAIN
       =================================================== */}
 
-      <main className="p-5 space-y-5">
+      <main className="p-4 sm:p-5 space-y-5">
 
         {/* HEADER */}
 
@@ -463,7 +463,7 @@ export default function CRMDashboardPage() {
 
           <div>
 
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
               CRM Dashboard
             </h1>
 
@@ -535,7 +535,7 @@ export default function CRMDashboardPage() {
 
           {/* LEADS TABLE */}
 
-          <div className="col-span-9 bg-white rounded-3xl border shadow-sm p-5 overflow-x-auto">
+          <div className="col-span-12 lg:col-span-9 bg-white rounded-3xl border shadow-sm p-5 overflow-x-auto">
 
             <div className="flex items-center justify-between mb-6">
 
@@ -559,7 +559,7 @@ export default function CRMDashboardPage() {
 
             </div>
 
-            <table className="w-full">
+            <table className="w-full min-w-[760px]">
 
               <thead>
 
@@ -724,7 +724,7 @@ export default function CRMDashboardPage() {
 
           {/* PIE CHART */}
 
-          <div className="col-span-3">
+          <div className="col-span-12 lg:col-span-3">
 
             <div className="bg-white rounded-3xl border p-5 shadow-sm">
 
@@ -732,7 +732,7 @@ export default function CRMDashboardPage() {
                 Lead Status Overview
               </h2>
 
-              <div className="relative w-[190px] h-[190px] mx-auto">
+              <div className="relative w-[160px] h-[160px] sm:w-[190px] sm:h-[190px] mx-auto">
 
                 <ResponsiveContainer
                   width="100%"
@@ -798,7 +798,7 @@ export default function CRMDashboardPage() {
 
       {selectedCard && (
 
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
@@ -816,7 +816,7 @@ export default function CRMDashboardPage() {
               opacity: 1,
               scale: 1,
             }}
-            className="relative bg-white rounded-3xl p-8 w-full max-w-2xl shadow-2xl z-10"
+            className="relative bg-white rounded-3xl p-6 sm:p-8 w-full max-w-2xl shadow-2xl z-10 max-h-[90vh] overflow-y-auto"
           >
 
             <button
@@ -882,7 +882,7 @@ export default function CRMDashboardPage() {
 
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
 
-          <div className="relative w-full max-w-[760px] rounded-3xl bg-white p-8 shadow-2xl">
+          <div className="relative w-full max-w-[760px] rounded-3xl bg-white p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
 
             <button
               onClick={() =>
@@ -907,7 +907,7 @@ export default function CRMDashboardPage() {
 
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
               <div>
 
@@ -1117,9 +1117,9 @@ export default function CRMDashboardPage() {
 
       {selectedLead && (
 
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
 
-          <div className="bg-white rounded-3xl p-8 w-[500px] relative">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 w-full max-w-[500px] relative max-h-[90vh] overflow-y-auto">
 
             <button
               onClick={() =>

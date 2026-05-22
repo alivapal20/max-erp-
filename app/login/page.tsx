@@ -82,7 +82,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#f7faf5] via-white to-[#edf7ea] min-h-screen flex flex-col">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#f7faf5] via-white to-[#edf7ea] min-h-screen flex flex-col overflow-x-hidden">
 
         {/* Background Glow */}
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-green-200/30 blur-3xl rounded-full" />
@@ -90,9 +90,9 @@ export default function LoginPage() {
 
         {/* Main Section */}
         <section className="relative z-10 flex-1">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-20">
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
 
               {/* LEFT SIDE (lazy-loaded to reduce initial bundle) */}
               <LoginShowcase />
@@ -102,22 +102,22 @@ export default function LoginPage() {
 
                 <div className="w-full max-w-xl">
 
-                  <div className="backdrop-blur-2xl bg-white/80 border border-white/40 rounded-[40px] p-8 md:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.12)]">
+                  <div className="backdrop-blur-2xl bg-white/80 border border-white/40 rounded-[40px] p-6 sm:p-8 md:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.12)]">
 
                     {/* Icon */}
                     <div className="flex justify-center mb-8">
-                      <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Lock className="w-12 h-12 text-primary" />
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Lock className="w-10 h-10 sm:w-12 sm:h-12 text-primary" />
                       </div>
                     </div>
 
                     {/* Heading */}
                     <div className="text-center mb-10">
-                      <h2 className="text-4xl font-bold text-foreground mb-3">
+                      <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
                         Login to Portal
                       </h2>
 
-                      <p className="text-foreground/60 text-lg">
+                      <p className="text-foreground/60 text-base sm:text-lg">
                         Enter your credentials to continue
                       </p>
                     </div>
@@ -145,7 +145,7 @@ export default function LoginPage() {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="h-14 pl-12 rounded-2xl border-border focus-visible:ring-primary"
+                            className="h-12 sm:h-14 pl-12 rounded-2xl border-border focus-visible:ring-primary"
                           />
                         </div>
                       </div>
@@ -165,7 +165,7 @@ export default function LoginPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             style={{ WebkitAppearance: 'none' }}
-                            className="h-14 pl-12 pr-12 rounded-2xl border-border focus-visible:ring-primary [&::-ms-reveal]:hidden [&::-ms-clear]:hidden"
+                            className="h-12 sm:h-14 pl-12 pr-12 rounded-2xl border-border focus-visible:ring-primary [&::-ms-reveal]:hidden [&::-ms-clear]:hidden"
                           />
 
                           <button
@@ -189,7 +189,7 @@ export default function LoginPage() {
                         </label>
 
                         <Select onValueChange={setDepartment}>
-                          <SelectTrigger className="w-full h-14 rounded-2xl border-border focus:ring-primary">
+                          <SelectTrigger className="w-full h-12 sm:h-14 rounded-2xl border-border focus:ring-primary">
                             <SelectValue placeholder="Select Department" />
                           </SelectTrigger>
 
@@ -214,7 +214,7 @@ export default function LoginPage() {
                       </div>
 
                       {/* Remember */}
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
                         <div className="flex items-center space-x-2">
                           <Checkbox
@@ -246,7 +246,7 @@ export default function LoginPage() {
                       <Button
                         type="submit"
                         onClick={handleLogin}
-                        className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#0b4d1b] to-[#14742f] hover:opacity-95 text-white text-lg shadow-[0_15px_40px_rgba(0,128,0,0.25)] transition-all duration-300"
+                        className="w-full h-12 sm:h-14 rounded-2xl bg-gradient-to-r from-[#0b4d1b] to-[#14742f] hover:opacity-95 text-white text-base sm:text-lg shadow-[0_15px_40px_rgba(0,128,0,0.25)] transition-all duration-300"
                       >
                         Login
 

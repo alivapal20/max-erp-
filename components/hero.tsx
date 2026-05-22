@@ -26,10 +26,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[85vh] bg-gradient-to-br from-background via-background to-secondary/20 overflow-hidden pt-20 pb-10">
+    <section className="relative min-h-[85vh] bg-gradient-to-br from-background via-background to-secondary/20 overflow-hidden pt-16 sm:pt-20 pb-10">
       {/* Floating gradient backgrounds */}
-      <div className="absolute top-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-40"></div>
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl opacity-40"></div>
+      <div className="absolute top-20 right-10 w-72 h-72 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl opacity-40"></div>
+      <div className="absolute bottom-20 left-10 w-64 h-64 sm:w-80 sm:h-80 bg-accent/10 rounded-full blur-3xl opacity-40"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -61,13 +61,13 @@ export default function Hero() {
             </motion.p>
 
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
-              <Button className="bg-primary hover:bg-primary/80 text-white px-8 py-6 text-base">
+              <Button className="bg-primary hover:bg-primary/80 text-white px-8 py-6 text-base w-full sm:w-auto">
                 Explore Products
               </Button>
 
              <Button
                variant="outline"
-               className="border-primary/30 hover:bg-primary/17 px-8 py-6 text-base text-primary hover:text-primary"
+               className="border-primary/30 hover:bg-primary/17 px-8 py-6 text-base text-primary hover:text-primary w-full sm:w-auto"
               >
               Request a Quote
              </Button>
@@ -76,7 +76,7 @@ export default function Hero() {
 
             {/* Stats Row */}
             <motion.div
-              className="flex items-center gap-8 pt-6 border-t border-border"
+              className="flex flex-wrap items-center gap-6 sm:gap-8 pt-6 border-t border-border"
               variants={itemVariants}
             >
               <div>
@@ -96,10 +96,10 @@ export default function Hero() {
 
           {/* Right Visual - Product Display */}
           <motion.div
-            className="relative h-96 lg:h-full flex items-center justify-center"
+            className="relative h-72 sm:h-96 lg:h-full flex items-center justify-center"
             variants={itemVariants}
           >
-            <div className="relative w-full h-96">
+            <div className="relative w-full h-72 sm:h-96">
               {/* Circular background with gradient */}
               <div className="absolute inset-[-40px] bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl"></div>
 
@@ -110,7 +110,7 @@ export default function Hero() {
                   alt="Thermal paper rolls and printers"
                   fill
                   style={{ objectFit: 'contain' }}
-                  className="rounded-xl scale-130 translate-x-6"
+                  className="rounded-xl scale-110 sm:scale-130 translate-x-0 sm:translate-x-6"
                   priority />
                
               </div>

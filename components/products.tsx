@@ -54,7 +54,7 @@ export default function Products() {
   };
 
   return (
-    <section id="products" className="py-20 bg-secondary/20">
+    <section id="products" className="py-16 sm:py-20 bg-secondary/20">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -118,7 +118,7 @@ export default function Products() {
                     <img
                       src={productImages[product.name]}
                       alt={product.name}
-                      className="w-full h-[240px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[200px] sm:h-[240px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
 
                     {/* Floating Icon */}
@@ -139,18 +139,18 @@ export default function Products() {
                   {/* CONTENT */}
                   <div className="px-2 pb-3">
 
-                    <h4 className="text-[32px] font-bold text-foreground mb-3 leading-none">
+                    <h4 className="text-2xl sm:text-[32px] font-bold text-foreground mb-3 leading-none">
                       {product.name}
                     </h4>
 
-                    <p className="text-[18px] text-foreground/70 leading-relaxed mb-6">
+                    <p className="text-[15px] sm:text-[18px] text-foreground/70 leading-relaxed mb-6">
                       {product.description}
                     </p>
 
                     {/* CTA */}
                     <div className="flex items-center text-primary font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
 
-                      <span className="text-[18px]">
+                      <span className="text-[15px] sm:text-[18px]">
                         Learn More
                       </span>
 

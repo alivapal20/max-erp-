@@ -17,9 +17,9 @@ export default function LoginShowcase() {
 
       <div className="space-y-6">
         <div>
-          <p className="text-primary font-semibold text-lg mb-3">Welcome Back!</p>
+          <p className="text-primary font-semibold text-base sm:text-lg mb-3">Welcome Back!</p>
 
-          <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
             Login to your
             <span className="block text-primary">account</span>
           </h1>
@@ -27,7 +27,7 @@ export default function LoginShowcase() {
 
         <div className="w-20 h-1 bg-primary rounded-full" />
 
-        <p className="text-lg text-foreground/70 leading-relaxed max-w-xl">
+        <p className="text-base sm:text-lg text-foreground/70 leading-relaxed max-w-xl">
           Access your dashboard to manage orders, track deliveries, and explore our premium paper solutions with integrated ERP tools.
         </p>
       </div>
@@ -42,11 +42,11 @@ export default function LoginShowcase() {
           <div className="w-[500px] h-[500px] bg-green-200/30 blur-3xl rounded-full" />
         </div>
 
-        <div className="relative z-10 flex justify-center">
-          <Image src="/image/img.png" alt="Thermal Paper Rolls" width={520} height={520} loading="eager" style={{ width: 'auto', height: 'auto' }} className="object-contain drop-shadow-2xl" />
+        <div className="relative z-10 flex justify-center px-4 sm:px-0">
+          <Image src="/image/img.png" alt="Thermal Paper Rolls" width={520} height={520} loading="eager" style={{ width: 'auto', height: 'auto' }} className="object-contain drop-shadow-2xl w-full max-w-[420px] sm:max-w-[520px]" />
         </div>
 
-        <motion.div whileHover={{ y: -5 }} className="relative z-20 mt-[-40px] backdrop-blur-xl bg-gradient-to-r from-[#0b4d1b] to-[#135d24] rounded-3xl p-6 shadow-[0_25px_60px_rgba(0,0,0,0.35)] border border-white/10">
+        <motion.div whileHover={{ y: -5 }} className="relative z-20 mt-[-40px] backdrop-blur-xl bg-gradient-to-r from-[#0b4d1b] to-[#135d24] rounded-3xl p-4 sm:p-6 shadow-[0_25px_60px_rgba(0,0,0,0.35)] border border-white/10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-white">
               <ShieldCheck className="w-7 h-7 mb-3 text-green-300" />

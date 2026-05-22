@@ -7,7 +7,7 @@ export default function Clients() {
   // Render full clients array then duplicate for seamless marquee
 
  return (
-<section className="relative py-16 bg-gradient-to-b from-[#f7f8f5] via-[#dfe8da] to-[#f7f8f5]">
+<section className="relative py-12 sm:py-16 bg-gradient-to-b from-[#f7f8f5] via-[#dfe8da] to-[#f7f8f5]">
   {/* 
   <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-background to-transparent"></div>
    */}
@@ -23,12 +23,12 @@ export default function Clients() {
           <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
             Trusted By Industry Leaders
           </h2>
-          <h3 className="text-2xl font-bold text-foreground">Powering Enterprise Clients Worldwide</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-foreground">Powering Enterprise Clients Worldwide</h3>
         </motion.div>
 
         {/* Marquee Container */}
         <div className="overflow-hidden">
-          <div className="flex gap-12 py-8 whitespace-nowrap min-w-max flex-shrink-0 animate-[scroll_20s_linear_infinite] will-change-transform">
+          <div className="flex gap-6 sm:gap-12 py-6 sm:py-8 whitespace-nowrap min-w-max flex-shrink-0 animate-[scroll_20s_linear_infinite] will-change-transform">
             {[...clients, ...clients].map((client, index) => (
               <motion.div
                 key={index}
@@ -38,7 +38,7 @@ export default function Clients() {
                 <img
                   src={client}
                   alt="client-logo"
-                  className="h-12 w-auto object-contain transition duration-300"
+                  className="h-10 sm:h-12 w-auto object-contain transition duration-300"
                 />
               </motion.div>
             ))}

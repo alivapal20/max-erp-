@@ -18,7 +18,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-20 bg-secondary/20">
+    <section className="py-16 sm:py-20 bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -41,8 +41,8 @@ export default function Testimonials() {
 
         {/* Testimonials Carousel */}
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="relative bg-background rounded-2xl border border-border p-10 md:p-12 shadow-lg"
+            <motion.div
+            className="relative bg-background rounded-2xl border border-border p-6 sm:p-10 md:p-12 shadow-lg"
             key={activeIndex}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,7 +90,7 @@ export default function Testimonials() {
             <div className="flex gap-2 mt-8">
               <motion.button
                 onClick={prevSlide}
-                className="p-3 rounded-full border border-border hover:bg-secondary/50 transition-colors"
+                className="p-2 sm:p-3 rounded-full border border-border hover:bg-secondary/50 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Previous testimonial"
@@ -99,7 +99,7 @@ export default function Testimonials() {
               </motion.button>
               <motion.button
                 onClick={nextSlide}
-                className="p-3 rounded-full border border-border hover:bg-secondary/50 transition-colors"
+                className="p-2 sm:p-3 rounded-full border border-border hover:bg-secondary/50 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Next testimonial"

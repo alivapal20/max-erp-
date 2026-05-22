@@ -24,7 +24,7 @@ export default function WhyChooseUs() {
   };
 
   return (
-    <section className="py-20 bg-foreground text-background relative overflow-hidden">
+    <section className="py-16 sm:py-20 bg-foreground text-background relative overflow-hidden">
       {/* Floating gradient accents */}
       <div className="absolute top-20 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20"></div>
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-accent/20 rounded-full blur-3xl opacity-20"></div>
@@ -61,7 +61,7 @@ export default function WhyChooseUs() {
           {whyChooseUs.map((feature, index) => (
             <motion.div
               key={index}
-              className="group p-8 bg-white/5 backdrop-blur rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:shadow-white/5"
+              className="group p-6 sm:p-8 bg-white/5 backdrop-blur rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:shadow-white/5"
               variants={itemVariants}
               whileHover={{ y: -4 }}
             >
@@ -90,7 +90,7 @@ export default function WhyChooseUs() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-white/70 text-lg mb-6">Ready to transform your business?</p>
+          <p className="text-white/70 text-base sm:text-lg mb-6">Ready to transform your business?</p>
           <motion.button
             className="px-8 py-3 bg-white text-foreground rounded-lg font-semibold hover:bg-white/90 transition-colors"
             whileHover={{ scale: 1.05 }}

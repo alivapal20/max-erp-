@@ -31,14 +31,14 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-20 bg-background overflow-hidden">
+    <section id="about" className="py-16 sm:py-20 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
 
           {/* Left Side - Image Collage */}
           <motion.div
-            className="relative w-full max-w-[600px] aspect-[4/5] mx-auto rounded-[300px] overflow-hidden bg-transparent"
+            className="relative w-full max-w-[600px] aspect-[4/5] mx-auto rounded-[200px] sm:rounded-[300px] overflow-hidden bg-transparent"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -121,7 +121,7 @@ export default function About() {
 
             {/* Stats Grid */}
             <motion.div
-              className="grid grid-cols-2 gap-6"
+              className="grid grid-cols-2 gap-4 sm:gap-6"
               variants={containerVariants}
             >
               {stats.map((stat, index) => {
@@ -130,7 +130,7 @@ export default function About() {
                 return (
                   <motion.div
                     key={index}
-                    className="p-5 bg-secondary/50 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300"
+                    className="p-4 sm:p-5 bg-secondary/50 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300"
                     variants={itemVariants}
                     whileHover={{ y: -4 }}
                   >

@@ -44,7 +44,7 @@ export default function ERPModules() {
   };
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-16 sm:py-20 bg-background">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -74,7 +74,7 @@ export default function ERPModules() {
 
         {/* Modules Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -85,31 +85,31 @@ export default function ERPModules() {
 
             <motion.div
               key={module.id}
-              className="group relative overflow-hidden bg-white rounded-[32px] min-h-[360px] border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 p-8"
+              className="group relative overflow-hidden bg-white rounded-[32px] min-h-[360px] border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 p-6 sm:p-8"
               variants={itemVariants}
               whileHover={{ y: -6 }}
             >
 
-              <div className="relative z-10 flex items-center justify-between gap-6 h-full">
+              <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 h-full">
 
                 {/* LEFT CONTENT */}
-                <div className="flex-1 max-w-[45%]">
+                <div className="flex-1 w-full lg:max-w-[45%]">
 
-                  <h4 className="text-[22px] font-bold text-primary mb-3">
+                  <h4 className="text-[20px] sm:text-[22px] font-bold text-primary mb-3">
                     {module.name}
                   </h4>
 
                   {/* Accent Line */}
                   <div className="w-10 h-[3px] bg-primary rounded-full mb-5" />
 
-                  <p className="text-[17px] text-foreground/70 leading-relaxed mb-8">
+                  <p className="text-[15px] sm:text-[17px] text-foreground/70 leading-relaxed mb-8">
                     {module.description}
                   </p>
 
                   {/* Features */}
                   <ul className="space-y-4">
 
-                    <li className="flex items-center gap-3 text-[15px] text-foreground/70">
+                    <li className="flex items-center gap-3 text-[14px] sm:text-[15px] text-foreground/70">
 
                       <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
                         <Check className="w-3 h-3 text-primary" />
@@ -119,7 +119,7 @@ export default function ERPModules() {
 
                     </li>
 
-                    <li className="flex items-center gap-3 text-[15px] text-foreground/70">
+                    <li className="flex items-center gap-3 text-[14px] sm:text-[15px] text-foreground/70">
 
                       <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
                         <Check className="w-3 h-3 text-primary" />
@@ -134,11 +134,11 @@ export default function ERPModules() {
                 </div>
 
                 {/* RIGHT IMAGE */}
-                <div className="relative flex items-center justify-center min-w-[340px]">
+                <div className="relative flex items-center justify-center w-full lg:min-w-[340px]">
 
                   {/* Circle Background */}
                   <div
-className={`absolute w-[280px] h-[280px] rounded-full ${moduleColors[module.name]} blur-[40px] opacity-80`}
+className={`absolute w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px] rounded-full ${moduleColors[module.name]} blur-[40px] opacity-80`}
 
 />
 
@@ -146,7 +146,7 @@ className={`absolute w-[280px] h-[280px] rounded-full ${moduleColors[module.name
                   <img
                     src={moduleImages[module.name]}
                     alt={module.name}
-className="relative z-10 w-[360px] h-[360px] object-contain transition-transform duration-500 group-hover:scale-105"                
+className="relative z-10 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] lg:w-[360px] lg:h-[360px] object-contain transition-transform duration-500 group-hover:scale-105"                
 
 
 />

@@ -188,12 +188,12 @@ export default function ManufacturingDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f8f7]">
+    <div className="min-h-screen bg-[#f6f8f7] overflow-x-hidden">
 
       {/* TOPBAR */}
-      <header className="h-[72px] bg-white border-b border-gray-200 px-8 flex items-center justify-between">
+      <header className="h-auto sm:h-[72px] bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 py-3 sm:py-0">
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 flex-1 min-w-0">
 
           <button className="w-11 h-11 rounded-2xl border bg-white flex items-center justify-center">
 
@@ -205,7 +205,7 @@ export default function ManufacturingDashboardPage() {
 
           </button>
 
-          <div className="w-[300px] h-11 rounded-2xl border bg-[#fafafa] px-4 flex items-center gap-3">
+          <div className="w-full sm:w-[300px] h-11 rounded-2xl border bg-[#fafafa] px-4 flex items-center gap-3">
 
             <Search className="w-4 h-4 text-gray-400" />
 
@@ -260,14 +260,14 @@ export default function ManufacturingDashboardPage() {
       </header>
 
       {/* CONTENT */}
-      <div className="p-7 space-y-6">
+      <div className="p-4 sm:p-6 lg:p-7 space-y-6">
 
         {/* TITLE */}
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
 
           <div>
 
-            <h1 className="text-[42px] font-bold text-black">
+            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-black">
               Manufacturing Dashboard
             </h1>
 
@@ -277,7 +277,7 @@ export default function ManufacturingDashboardPage() {
 
           </div>
 
-          <div className="h-14 px-5 rounded-2xl bg-white border flex items-center gap-3">
+          <div className="h-14 px-5 rounded-2xl bg-white border flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
 
             <Calendar className="w-5 h-5" />
 
@@ -290,7 +290,7 @@ export default function ManufacturingDashboardPage() {
         </div>
 
         {/* KPI */}
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
 
           {stats.map((item, index) => {
 
@@ -310,7 +310,7 @@ export default function ManufacturingDashboardPage() {
                       {item.title}
                     </p>
 
-                    <h2 className="text-[38px] font-bold mt-3">
+                    <h2 className="text-3xl sm:text-[38px] font-bold mt-3">
                       {item.value}
                     </h2>
 
@@ -338,10 +338,10 @@ export default function ManufacturingDashboardPage() {
         <div className="grid grid-cols-12 gap-6">
 
           {/* LEFT */}
-          <div className="col-span-8 space-y-6">
+          <div className="col-span-12 lg:col-span-8 space-y-6">
 
             {/* BATCH TABLE */}
-            <div className="bg-white rounded-[28px] border p-6 shadow-sm">
+            <div className="bg-white rounded-[28px] border p-6 shadow-sm overflow-x-auto">
 
               <div className="flex items-center justify-between mb-6">
 
@@ -349,17 +349,17 @@ export default function ManufacturingDashboardPage() {
                   Production Batches
                 </h2>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
 
-                  <button className="h-11 px-5 rounded-2xl border bg-white">
+                  <button className="h-11 px-5 rounded-2xl border bg-white w-full sm:w-auto">
                     All Machines
                   </button>
 
-                  <button className="h-11 px-5 rounded-2xl border bg-white">
+                  <button className="h-11 px-5 rounded-2xl border bg-white w-full sm:w-auto">
                     All Status
                   </button>
 
-                  <button onClick={() => setShowBatchModal(true)} className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2">
+                  <button onClick={() => setShowBatchModal(true)} className="h-11 px-6 rounded-2xl bg-green-500 text-white flex items-center gap-2 w-full sm:w-auto">
 
                     <ClipboardList className="w-4 h-4" />
 
@@ -371,7 +371,7 @@ export default function ManufacturingDashboardPage() {
 
               </div>
 
-              <table className="w-full">
+              <table className="w-full min-w-[900px]">
 
                 <thead>
 
@@ -486,7 +486,7 @@ export default function ManufacturingDashboardPage() {
             </div>
 
             {/* PRODUCTION ANALYTICS */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
               {/* TREND */}
               <div className="bg-white rounded-[28px] border p-6 shadow-sm">
@@ -622,7 +622,7 @@ export default function ManufacturingDashboardPage() {
           </div>
 
           {/* RIGHT */}
-          <div className="col-span-4 space-y-6">
+          <div className="col-span-12 lg:col-span-4 space-y-6">
 
             {/* ALERTS */}
             <div className="bg-white rounded-[28px] border p-6 shadow-sm">
@@ -738,7 +738,7 @@ export default function ManufacturingDashboardPage() {
             className="absolute inset-0 bg-black/30 backdrop-blur-sm"
           />
 
-          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-8 shadow-2xl border">
+          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-6 sm:p-8 shadow-2xl border max-h-[90vh] overflow-y-auto">
 
             <div className="flex items-start justify-between mb-8">
 
@@ -767,7 +767,7 @@ export default function ManufacturingDashboardPage() {
 
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
               <div className="bg-gray-50 rounded-2xl p-5">
 
@@ -819,7 +819,7 @@ export default function ManufacturingDashboardPage() {
 
             </div>
 
-            <div className="flex gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
 
               <button className="flex-1 h-14 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-semibold">
                 Start Production
@@ -849,7 +849,7 @@ export default function ManufacturingDashboardPage() {
             className="absolute inset-0 bg-black/30 backdrop-blur-sm"
           />
 
-          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-8 shadow-2xl border">
+          <div className="relative bg-white w-full max-w-2xl rounded-[32px] p-6 sm:p-8 shadow-2xl border max-h-[90vh] overflow-y-auto">
 
             <div className="flex items-start justify-between mb-8">
 
@@ -872,7 +872,7 @@ export default function ManufacturingDashboardPage() {
 
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
               <div>
                 <label className="text-sm text-gray-500">Product</label>
@@ -906,7 +906,7 @@ export default function ManufacturingDashboardPage() {
 
             </div>
 
-            <div className="flex gap-4 mt-8 justify-end">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-end">
 
               <button onClick={() => setShowBatchModal(false)} className="px-6 py-3 rounded-2xl border">Cancel</button>
 

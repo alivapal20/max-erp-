@@ -11,14 +11,14 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-auto sm:h-16 py-3 sm:py-0 gap-3">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <img src="/mainlogo.png" alt="Meetel" className="w-15 h-15 rounded-lg object-contain" />
-            <h1 className="text-3xl font-black leading-none tracking-tight text-[#0a8f3d] sm:text-3xl lg:text-4xl">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <img src="/mainlogo.png" alt="Meetel" className="w-10 h-10 sm:w-15 sm:h-15 rounded-lg object-contain" />
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-none tracking-tight text-[#0a8f3d]">
             MEETEL
           </h1>
-            <p className="mt-1 whitespace-nowrap text-[8px] font-semibold tracking-wide text-gray-700 sm:text-[10px]">
+            <p className="mt-1 whitespace-nowrap text-[7px] sm:text-[10px] font-semibold tracking-wide text-gray-700 leading-tight">
             COMPUTER'S & COATED PAPER CO.
           </p>
           </div>

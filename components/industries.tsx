@@ -209,7 +209,7 @@ export default function Industries() {
     <>
       <section
         id="solutions"
-        className={`py-20 bg-background transition-all duration-300 ${
+        className={`py-16 sm:py-20 bg-background transition-all duration-300 ${
           selectedIndustry ? 'blur-sm pointer-events-none select-none' : ''
         }`}
       >
@@ -254,11 +254,11 @@ export default function Industries() {
                 whileHover={{ y: -6 }}
               >
                 {/* IMAGE AREA */}
-                <div className="relative overflow-hidden bg-[#f7f8f5] h-[255px]">
+                <div className="relative overflow-hidden bg-[#f7f8f5] h-[200px] sm:h-[255px]">
                   <img
                     src={industryImages[industry.name]}
                     alt={industry.name}
-                    className="w-[78%] h-[78%] object-contain mx-auto mt-6 transition-transform duration-700 group-hover:scale-105"
+                    className="w-[78%] h-[78%] object-contain mx-auto mt-5 sm:mt-6 transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
 
@@ -303,7 +303,7 @@ export default function Industries() {
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="relative w-full max-w-4xl bg-white rounded-[30px] overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
+              <div className="relative w-full max-w-4xl bg-white rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
                 {/* CLOSE BUTTON */}
                 <button
                   onClick={() => setSelectedIndustry(null)}
@@ -313,11 +313,11 @@ export default function Industries() {
                 </button>
 
                 {/* TOP IMAGE */}
-                <div className="bg-[#f7f8f5] h-[300px] flex items-center justify-center">
+                <div className="bg-[#f7f8f5] h-[220px] sm:h-[300px] flex items-center justify-center">
                   <img
                     src={industryImages[selectedIndustry.name]}
                     alt={selectedIndustry.name}
-                    className="w-[300px] h-[300px] object-contain"
+                    className="w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] object-contain"
                   />
                 </div>
 

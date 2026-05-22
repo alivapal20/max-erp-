@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function CTA() {
   return (
-    <section className="relative py-20 bg-background overflow-hidden">
+    <section className="relative py-16 sm:py-20 bg-background overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl opacity-50"></div>
@@ -42,14 +42,14 @@ export default function CTA() {
             viewport={{ once: true }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-primary hover:bg-primary/90 text-white px-10 py-6 text-base rounded-lg">
+              <Button className="bg-primary hover:bg-primary/90 text-white px-10 py-6 text-base rounded-lg w-full sm:w-auto">
                 Get Started Free
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="outline"
-                className="border-primary/30 hover:bg-primary/5 px-10 py-6 text-base rounded-lg"
+                className="border-primary/30 hover:bg-primary/5 px-10 py-6 text-base rounded-lg w-full sm:w-auto"
               >
                 <span>Request Demo</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
